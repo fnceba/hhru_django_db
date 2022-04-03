@@ -103,5 +103,20 @@ class ProfessionalRoles(models.Model):
     name = CharField(max_length=100, **nb)
 
 
+class WorkingDays(models.Model):
+    id = CharField(max_length=100, **nb)
+    name = CharField(max_length=100, **nb)
+
+
+class WorkingTimeIntervals(models.Model):
+    id = CharField(max_length=100, **nb)
+    name = CharField(max_length=100, **nb)
+
+
+class WorkingTimeModes(models.Model):
+    id = CharField(max_length=100, **nb)
+    name = CharField(max_length=100, **nb)
+
+
 class Errors(models.Model):
     type = CharField(max_length=100, **nb)
