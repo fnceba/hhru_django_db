@@ -21,6 +21,15 @@ class AddressMetroStation(models.Model):
     lng = FloatField(**nb)
 
 
+class DriverLicenseType(models.Model):
+    id = CharField(max_length=200, primary_key=True)
+
+
+class ProfessionalRole(models.Model):
+    id = CharField(max_length=200, primary_key=True)
+    name = CharField(max_length=200, **nb)
+
+
 class KeySkill(models.Model):
     name = CharField(max_length=200, **nb)
 
@@ -30,11 +39,6 @@ class Specialization(models.Model):
     name = CharField(max_length=200, **nb)
     profarea_id = CharField(max_length=200, **nb)
     profarea_name = CharField(max_length=200, **nb)
-
-
-class ProfessionalRole(models.Model):
-    id = CharField(max_length=200, primary_key=True)
-    name = CharField(max_length=200, **nb)
 
 
 class WorkingDay(models.Model):
@@ -59,9 +63,10 @@ class Error(models.Model):
 class Vacancy(models.Model):
 
     addresses_of_metro_stations = models.ManyToManyField(AddressMetroStation)
+    driver_license_types = models.ManyToMantField(DriverLicenseType)
+    professional_roles = models.ManyToMantField(ProfessionalRole)
     key_skills = models.ManyToMantField(KeySkill)
     specializations = models.ManyToMantField(Specialization)
-    professional_roles = models.ManyToMantField(ProfessionalRole)
     working_days = models.ManyToMantField(WorkingDay)
     working_time_interval = models.ManyToMantField(WorkingTimeInterval)
     working_time_modes = models.ManyToMantField(WorkingTimeMode)
@@ -130,3 +135,13 @@ class Vacancy(models.Model):
     branded_description = TextField(**nb)
     request_id = CharField(max_length=200, **nb)
     code = CharField(max_length=200, **nb)
+    insider_interview_id = CharField(max_length=200, **nb)
+    insider_interview_url = CharField(max_length=200, **nb)
+    vacancy_constructor_template_id = IntegerField(**nb)
+    vacancy_constructor_template_name = CharField(max_length=200, **nb)
+    vacancy_constructor_template_top_picture_height = IntegerField(**nb)
+    vacancy_constructor_template_top_picture_width = IntegerField(**nb)
+    vacancy_constructor_template_top_picture_path = CharField(max_length=200, **nb)
+    vacancy_constructor_template_top_picture_blurred_path = CharField(
+        max_length=200, **nb
+    )
