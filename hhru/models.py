@@ -9,11 +9,64 @@ from django.db.models.fields import (
 )
 from django.db.models.fields.related import ManyToManyField
 
-# it ain't much, but it's honest work
 nb = dict(null=True, blank=True)
-#! - надо подробнее чекнуть, что это
-### - нужно создать отдельную модель
+
+
+class AddressMetroStation(models.Model):
+    station_name = CharField(max_length=200, **nb)
+    line_name = CharField(max_length=200, **nb)
+    station_id = CharField(max_length=200, **nb)
+    line_id = CharField(max_length=200, **nb)
+    lat = FloatField(**nb)
+    lng = FloatField(**nb)
+
+
+class KeySkill(models.Model):
+    name = CharField(max_length=200, **nb)
+
+
+class Specialization(models.Model):
+    id = CharField(max_length=200, primary_key=True)
+    name = CharField(max_length=200, **nb)
+    profarea_id = CharField(max_length=200, **nb)
+    profarea_name = CharField(max_length=200, **nb)
+
+
+class ProfessionalRole(models.Model):
+    id = CharField(max_length=200, primary_key=True)
+    name = CharField(max_length=200, **nb)
+
+
+class WorkingDay(models.Model):
+    id = CharField(max_length=200, primary_key=True)
+    name = CharField(max_length=200, **nb)
+
+
+class WorkingTimeInterval(models.Model):
+    id = CharField(max_length=200, primary_key=True)
+    name = CharField(max_length=200, **nb)
+
+
+class WorkingTimeMode(models.Model):
+    id = CharField(max_length=200, primary_key=True)
+    name = CharField(max_length=200, **nb)
+
+
+class Error(models.Model):
+    type = CharField(max_length=200, **nb)
+
+
 class Vacancy(models.Model):
+
+    addresses_of_metro_stations = models.ManyToManyField(AddressMetroStation)
+    key_skills = models.ManyToMantField(KeySkill)
+    specializations = models.ManyToMantField(Specialization)
+    professional_roles = models.ManyToMantField(ProfessionalRole)
+    working_days = models.ManyToMantField(WorkingDay)
+    working_time_interval = models.ManyToMantField(WorkingTimeInterval)
+    working_time_modes = models.ManyToMantField(WorkingTimeMode)
+    errors = models.ManyToMantField(Error)
+
     id = CharField(max_length=200, primary_key=True)
     premium = BooleanField()
     billing_type_id = CharField(max_length=200, **nb)
@@ -77,54 +130,3 @@ class Vacancy(models.Model):
     branded_description = TextField(**nb)
     request_id = CharField(max_length=200, **nb)
     code = CharField(max_length=200, **nb)
-
-
-class AddressMetroStations(models.Model):
-    station_name = CharField(max_length=200, **nb)
-    line_name = CharField(max_length=200, **nb)
-    station_id = CharField(max_length=200, **nb)
-    line_id = CharField(max_length=200, **nb)
-    lat = FloatField(**nb)
-    lng = FloatField(**nb)
-
-
-class KeySkills(models.Model):
-    vacancy = ManyToManyField(Vacancy, on_delete=models.PROTECT)
-    name = CharField(max_length=200, **nb)
-
-
-class Specializations(models.Model):
-    vacancy = ManyToManyField(Vacancy, on_delete=models.PROTECT)
-    id = CharField(max_length=200, primary_key=True)
-    name = CharField(max_length=200, **nb)
-    profarea_id = CharField(max_length=200, **nb)
-    profarea_name = CharField(max_length=200, **nb)
-
-
-class ProfessionalRoles(models.Model):
-    vacancy = ManyToManyField(Vacancy, on_delete=models.PROTECT)
-    id = CharField(max_length=200, primary_key=True)
-    name = CharField(max_length=200, **nb)
-
-
-class WorkingDays(models.Model):
-    vacancy = ManyToManyField(Vacancy, on_delete=models.PROTECT)
-    id = CharField(max_length=200, primary_key=True)
-    name = CharField(max_length=200, **nb)
-
-
-class WorkingTimeIntervals(models.Model):
-    vacancy = ManyToManyField(Vacancy, on_delete=models.PROTECT)
-    id = CharField(max_length=200, primary_key=True)
-    name = CharField(max_length=200, **nb)
-
-
-class WorkingTimeModes(models.Model):
-    vacancy = ManyToManyField(Vacancy, on_delete=models.PROTECT)
-    id = CharField(max_length=200, primary_key=True)
-    name = CharField(max_length=200, **nb)
-
-
-class Errors(models.Model):
-    vacancy = ManyToManyField(Vacancy, on_delete=models.PROTECT)
-    type = CharField(max_length=200, **nb)
