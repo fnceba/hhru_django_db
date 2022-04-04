@@ -159,7 +159,7 @@ class Vacancy(models.Model):
     )
 
     class Meta:
-        verbose_name_plural = "Vacansies"
+        verbose_name_plural = "Vacancies"
 
     @classmethod
     def create_with_all_fields(cls, vacancy_raw: dict) -> None:

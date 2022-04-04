@@ -31,7 +31,7 @@ def process_csv_form(request):
                     break
                 vacancy_raw = json.loads(requests.get(row[11]).content)
                 Vacancy.create_with_all_fields(vacancy_raw)
-            return HttpResponseRedirect("/admin")
+            return HttpResponseRedirect("/admin/hhru/vacancy")
 
     else:
         form = ReadFromCSVForm()
