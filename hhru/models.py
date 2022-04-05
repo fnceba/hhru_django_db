@@ -157,6 +157,7 @@ class Vacancy(models.Model):
     vacancy_constructor_template_top_picture_blurred_path = CharField(
         max_length=200, **nb
     )
+    response_url = CharField(max_length=200, **nb)
 
     class Meta:
         verbose_name_plural = "Vacancies"
