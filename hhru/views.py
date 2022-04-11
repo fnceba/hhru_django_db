@@ -49,7 +49,11 @@ def process_csv_form(request):
                 try:
                     api_url = row[11]
                 except:
-                    api_url = re.findall("\d+", " ".join(row))[0]
+                    api_url = (
+                        "https://api.hh.ru/vacancies/"
+                        + re.findall("\d+", " ".join(row))[0]
+                        + "?host=hh.ru"
+                    )
                 vacancy_raw = json.loads(session.get(api_url).content)
                 time.sleep(0.1)
 
